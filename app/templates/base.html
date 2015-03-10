@@ -1,30 +1,44 @@
-<!DOCTYPE html>
+
+
+<!--DOCTYPE HTML-->
+
 <html>
-<head>
-	<meta charset="utf-8" />
+  
+  <head>
+    <title>{{ title }} - TallyUp</title>
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootswatch/3.0.0/cyborg/bootstrap.min.css">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script type="text/javascript" src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>{{ title }} - TallyUp</title>
 	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-
-	<!-- Optional theme -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-	<link rel="stylesheet" type="text/css" href="/static/css/layout.css">
-	<!-- Latest compiled and minified JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-	<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
 	<link rel="shortcut icon" href="/static/img/tallyuplogo.png">
-	<script>
-	WebFont.load({
-		google: {
-			families: ["Roboto:300,regular","Roboto Condensed:regular"]
-		}
-	});
-	</script>
 	{% block head %}{% endblock %}
-</head>
-
-<body>
-	{% block content %}{% endblock %}
-</body>
+  </head>
+  
+  <body>
+    <div class="container">
+      <div class="header">
+        <ul class="nav nav-pills pull-right" style="margin-top:1.5%;">
+          <li class="active">
+            <a href="/">Home</a>
+          </li>
+          <li>
+            <a href="/about">About</a>
+          </li>
+          <li>
+            <a href="http://www.github.com/bendebebe/tallyup">Github</a>
+          </li>
+        </ul>
+        <a href="/"><img class="logo" src="/static/img/tallyupbanner.png" width="15%" height="7.5%"></a>
+      </div>
+      {% block content %}{% endblock %}
+      <div class="footer">
+        <p>&copy; TallyUp 2015</p>
+      </div>
+    </div>
+    <!-- /container -->
+  </body>
 </html>

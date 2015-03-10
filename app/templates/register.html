@@ -15,16 +15,17 @@
   <script src="/static/js/login.js"></script>
 </head>
 
-
 <body>
 <div class="container">
   <div class="row" id="pwd-container">
     <div class="col-md-4"></div>
     
     <div class="col-md-4">
-      <h1>Login</h1>
+      <h1>Register</h1>
       <section class="login-form">
         <form method="post" action="#" role="login">
+          <input type="first-name" name="first-name" placeholder="First Name" required class="form-control input-lg"/>
+          <input type="last-name" name="last-name" placeholder="Last Name" required class="form-control input-lg"/>
           <input type="email" name="email" placeholder="Email" required class="form-control input-lg"/>
           
           <input type="password" class="form-control input-lg" id="password" placeholder="Password" required="" />
@@ -33,11 +34,11 @@
           <div class="pwstrength_viewport_progress"></div>
           
           
-          <button type="submit" name="go" class="btn btn-lg btn-primary btn-block">Sign in</button>          
+          <button type="submit" name="go" class="btn btn-lg btn-primary btn-block">Register</button>          
         </form>
         
         <div class="form-links">
-          <a href="#">www.tallyup.com</a>
+          <a href="/index">www.tallyup.com</a>
         </div>
       </section>  
       </div>
