@@ -13,3 +13,7 @@ TallyUp is a web application that allows users to create an event, add any numbe
 * **PostgreSQL** - PostgreSQL (http://postgresql.org) is an open source object-relational database management system with an emphasis  on extensibility and standards-compliance. PostgreSQL, often simply Postgres, is cross-platform, and easily integrates easily with Flask, thus very valuable in terms of storing data securely and being able to retrieve it later.
 * **Bootstrap** - Bootstrap (http://getbootstrap.com) is a framework which uses HTML, CSS, and JS to build interactive and sensible user interfaces.
 * **jQuery** - jQuery (http://jquery.com) is a JavaScript library that provides easy HTML document traversal and manipulation, event handling, animation and Ajax calls. Its API is extremely accessible and extensive, making it an obvious choice.
+
+## Instructions
+* **Setup** - Install Python and pip. Then, run the following command: pip install -r requirements.txt
+* **Usage** - python app/views.py - Serves up the webpage locally at localhost:5000.

@@ -37,6 +37,11 @@ body {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+  font-size: 16px;
+}
+
+.row-clearfix {
+  background: white;
 }
 
 h1 {

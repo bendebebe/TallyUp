@@ -1,5 +1,24 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Hello, {{ user.nickname }}</h1>
+	<div class="row clearfix">
+		<div class="col-md-12 column">
+			<nav class="navbar navbar-default navbar-static-top" role="navigation">
+				<div class="navbar-header">
+				<button class="navbar-toggle" data-toggle="collapse"></button><a href="/"><img class="logo" src="/static/img/tallyupbanner.png" style="margin-left:2.5%;"width="15%" height="15%"></a></div>
+				<ul class="nav navbar-nav navbar-right" style="margin-right:2.5%;margin-top:.5%;margin-bottom:.5%;">
+						<li>
+							<a href="/">Home</a>
+						</li>
+						<li>
+							<a href="/login">Login</a>
+						</li>
+						<li>
+							<a href="http://www.github.com/bendebebe/tallyup">Github</a>
+						</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+
 {% endblock %}
