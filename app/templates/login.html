@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block head %}
+<script src="/static/js/login.js"></script>
+{% endblock %}
+{% block content %}
+
+<div class="container">
+  <div class="row" id="pwd-container">
+    <div class="col-md-4"></div>
+    
+    <div class="col-md-4">
+      <h1>Login</h1>
+      <section class="login-form">
+        <form method="post" action="#" role="login">
+          <input type="email" name="email" placeholder="Email" required class="form-control input-lg"/>
+          
+          <input type="password" class="form-control input-lg" id="password" placeholder="Password" required="" />
+          
+          
+          <div class="pwstrength_viewport_progress"></div>
+          
+          
+          <button type="submit" name="go" class="btn btn-lg btn-primary btn-block">Sign in</button>          
+        </form>
+        
+        <div class="form-links">
+          <a href="#">www.tallyup.com</a>
+        </div>
+      </section>  
+      </div>
+  </div>  
+  
+</div>
+{% endblock %}
+
