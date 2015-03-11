@@ -1,3 +1,5 @@
+SQLALCHEMY_DATABASE_URI = "postgresql://bendebebe:chelsea@localhost/tally-up"
+
 class Config(object):
     DEBUG = False
     TESTING = False
