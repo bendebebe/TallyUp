@@ -1,9 +1,9 @@
 import os
 
-if os.environ.get('DATABASE_URL') is NONE:
-	SQLALCHEMY_DATABASE_URI = "postgresql://bendebebe:@localhost/tally-up"
+if os.environ.get('DATABASE_URL') is None:
+    SQLALCHEMY_DATABASE_URI = "postgresql://bendebebe:@localhost/tally-up"
 else:
-	SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL']
+    SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL']
 SECRET_KEY = '48205hrjf0238'
 
 class Config(object):
