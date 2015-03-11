@@ -1,6 +1,6 @@
 import os
 
-SQLALCHEMY_DATABASE_URI = "postgresql://bendebebe:chelsea@localhost/tally-up"
+SQLALCHEMY_DATABASE_URI = "postgresql://bendebebe:@localhost/tally-up"
 SECRET_KEY = '48205hrjf0238'
 
 class Config(object):
@@ -25,3 +25,5 @@ class DevelopmentConfig(Config):
 
 class TestingConfig(Config):
     TESTING = True
+
+print(os.environ['DATABASE_URL'])
