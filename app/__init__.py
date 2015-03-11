@@ -2,6 +2,7 @@ from flask import Flask
 from flask_script import Manager
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
+from config import SECRET_KEY
 
 app = Flask(__name__)
 app.config.from_object('config')
