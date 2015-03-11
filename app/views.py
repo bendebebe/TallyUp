@@ -3,16 +3,13 @@ from flask import render_template, Flask
 from flask import request
 from flask_sqlalchemy import SQLAlchemy
 
-from app import app
-
+app = Flask(__name__)
 
 with app.test_request_context('/index', method='POST'):
     # now you can do something with the request until the
     # end of the with block, such as basic assertions:
     assert request.path == '/index'
     assert request.method == 'POST'
-
-
 
 @app.route('/')
 @app.route('/index')
