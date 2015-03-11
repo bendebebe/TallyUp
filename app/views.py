@@ -3,7 +3,8 @@ from flask import render_template, Flask
 from flask import request
 from flask_sqlalchemy import SQLAlchemy
 
-app = Flask(__name__)
+from app import app
+
 
 with app.test_request_context('/index', method='POST'):
     # now you can do something with the request until the
