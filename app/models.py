@@ -1,8 +1,9 @@
-from datetime import datetime as dt
+from datetime import date as dt
 from flask.ext.login import UserMixin
 from simplecrypt import encrypt
 from sqlalchemy.ext.hybrid import hybrid_property, hybrid_method
 from app import db, login_manager
+from config import SECRET_KEY
 
 ########################
 # Tables
@@ -27,31 +28,39 @@ class User(db.Model, UserMixin):
 
 	#Metadata tags useful for filtering
 	metadata_str = db.Column(db.LargeBinary(4096))
+	wins = db.Column(db.Integer)
+	losses = db.Column(db.Integer)
+	ties = db.Column(db.Integer)
+	total_played = db.Column(db.Integer)
 
-	events_hosting = db.relationship("Event", secondary=user_hosted, backref="user")
-	events_played = db.relationship("Event", secondary=user_played, backref="user")
+	#events_hosting = db.relationship("Event", secondary=user_hosted, backref="user")
+	#events_played = db.relationship("Event", secondary=user_played, backref="user")
 
 	def __init__(self, name):
 		self.name = name
 		self.password = ""
 		self.metadata_str = ""
-		self.record = {'wins': 0, 'losses': 0, 'ties': 0}
-		self.events_played = self.record['wins']+self.record['losses']+self.record['ties']
+		self.wins = 0
+		self.losses = 0
+		self.ties = 0
+		self.total_played = self.wins+self.losses+self.ties
 
 	@hybrid_method
 	def initialize(self, email, password):
 		self.email = email
-		self.password = encrypt("FH318HIOBQN491", password)
+		self.password = encrypt(SECRET_KEY, password)
 		db.session.commit()
 
+	'''
 	@hybrid_property
 	def upcoming_events(self):
-		return [e for e in self.events_played if e.datetime > dt.now()]
+		return [e for e in self.events_played if e.datetime > str(dt.today())]
 
 	@hybrid_property
 	def past_events(self):
 		return (self.events_played + 
-				[e for e in self.events_played if e.datetime < dt.now()])
+				[e for e in self.events_played if e.datetime < str(dt.today())])
+	'''
 
 	@hybrid_property
 	def get_metadata(self):
@@ -71,8 +80,8 @@ class Event(db.Model):
 	datetime = db.Column(db.DateTime)
 	game = db.Column(db.String(64))
 
-	def __init__(self, name, datetime, event_type, host, winner=None, loser=None, draw=False):
-		self.name = name
+	def __init__(self, event_name, datetime, event_type, host, winner=None, loser=None, draw=False):
+		self.name = event_name
 		self.datetime = datetime
 		self.winner = winner
 		self.loser = loser
@@ -114,7 +123,6 @@ def record_result(event, datetime, event_type, host, winner, loser, draw=False):
 		User(winner).record['wins'] += 1
 		User(loser).record['losses'] += 1
 	User(winner).events_played.append(e)
-	db.session.add(usr)
 	db.session.commit()
 	return e
 

@@ -12,7 +12,7 @@ class Config(object):
     CSRF_ENABLED = True
 
 
-class ProductionConfig(Config):
+class ProductionSettings(Config):
     DEBUG = False
 
 

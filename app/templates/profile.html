@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% if user != None %}
+    {% block navbar %}
+        <li>
+            <a href="/profile">Profile</a>
+        </li>
+        <li>
+            <a href="/host">Host Event</a>
+    {% endblock %}
+{% endif %}
+
+{% block content %}
+<div class="jumbotron">
+        <h1>{{ user.name }}'s Profile</h1>
+        <div>
+            <p>Wins: {{ user.wins }}, Losses: {{ user.losses }}, Ties: {{ user.ties }}</p>
+            <p>Total games played: {{ user.total_played }}</p>
+        </div>
+      </div>
+{% endblock %}

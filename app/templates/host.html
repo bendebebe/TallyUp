@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% if user != None %}
+    {% block navbar %}
+        <li>
+            <a href="/profile">Profile</a>
+        </li>
+        <li>
+            <a href="/host">Host Event</a>
+        </li>
+    {% endblock %}
+{% endif %}
+
+
+
+{% block content %}
+<h1>Host Event</h1>
+<form method="post" action="#">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label class="control-label">Event Name</label>
+            <div class="controls">
+              <input type="text" class="form-control" placeholder="ex. FIFA Tournament, etc." name="event-name">
+            </div>
+          </div>
+          <label class="form-label">Pick Participants</label>
+          <select class="form-control" multiple="multiple">
+            {% for user in users %}
+              <option>{{ user.name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label class="control-label">Type of Event/Game</label>
+            <div class="controls">
+              <input type="text" class="form-control" placeholder="ex. FIFA, Ping Pong, etc." name="event-type">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Event Description</label>
+            <textarea class="form-control" name="event-description"></textarea>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <label class="control-label">Select Event Date<br></label>
+          <input class="form-control" id="datetimepicker" type="text" name="datepicker">
+          <div class="form-group">
+            <div class="controls"></div>
+          </div>
+          <label class="form-label">Ready to host your event?</label>
+          <button type="submit" name="go" href="/host-event" class="btn btn-lg btn-primary btn-block">Submit</button>  
+        </div>
+      </div>
+    </form>
+{% endblock %}
