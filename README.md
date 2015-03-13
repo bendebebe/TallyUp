@@ -16,4 +16,4 @@ TallyUp is a web application that allows users to create an event, add any numbe
 
 ## Instructions
 * **Setup** - Install Python and pip. Then, run the following command: pip install -r requirements.txt
-* **Usage** - python app/views.py - Serves up the webpage locally at localhost:5000.
+* **Usage** - python sever.py - Serves up the webpage locally at localhost:5000.
