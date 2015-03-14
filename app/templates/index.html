@@ -12,11 +12,30 @@
 {% endif %}
 
 {% block content %}
-<div class="jumbotron">
-        <h1>TallyUp</h1>
-        <p class="lead">TallyUp is a web application that allows users to create an event, add any number of participants, and then keep track of wins, losses, and ties between participants. Students often want to play a series of games with their friends (i.e. FIFA) where it’s hard to keep track of wins and losses over a long period of time. TallyUp will allow college students to engage in long term game play with friends and to record their game results, in order to keep track of win/loss statistics.</p>
-        {% if user == None %}
-        	<a class="btn btn-lg center btn-primary" href="/register">Register</a><a class="btn btn-lg center btn-primary" style="margin-left:.5%;" href="/login">Sign In</a>
-        {% endif %}
+<div class="container-full">
+
+      <div class="row" style="margin-top:10%;margin-bottom:10%;">
+       
+        <div class="col-lg-12 text-center v-center">
+          
+          <h1>TallyUp</h1>
+          <p>Tally up your records against your friends!</p>
+          <a href="http://www.github.com/bendebebe/tallyup"><img src="/static/img/githubico.png" width="42" height="42"></img></a>
+        </div>
+        
+      </div> <!-- /row -->
+  
+      <div class="row">
+       
+        <div class="col-lg-12 text-center v-center" style="font-size:39pt;">
+          
+        </div>
+      
       </div>
+  
+    <br><br><br><br><br>
+
+</div> <!-- /container full -->
+
+
 {% endblock %}

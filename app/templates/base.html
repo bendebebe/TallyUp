@@ -6,6 +6,7 @@
     <title>{{ title }} - TallyUp</title>
     <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootswatch/3.0.0/cyborg/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/layout.css">
     <script type="text/javascript" src="/static/js/jquery.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script type="text/javascript" src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
@@ -37,12 +38,14 @@
         </ul>
         <a href="/"><img class="logo" src="/static/img/tallyupbanner.png" width="15%" height="7.5%"></a>
       </div>
+      </div>
+    <!-- /container -->
       {% block content %}{% endblock %}
+      <div class="container">
       <div class="footer">
-        <p>&copy; TallyUp 2015 - <a href="http://www.github.com/bendebebe/tallyup">Github</a></p>
+        <p>&copy; TallyUp 2015 - <a href="http://www.github.com/bendebebe/tallyup">Github<img src="/static/img/githubico.png" width="42" height="42"></img></a></p>
       </div>
       </div>
     </div>
-    <!-- /container -->
   </body>
 </html>
