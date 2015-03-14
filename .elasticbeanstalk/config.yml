@@ -1,0 +1,10 @@
+branch-defaults:
+  master:
+    environment: tally-up-env
+global:
+  application_name: tally-up
+  default_ec2_keyname: aws-eb
+  default_platform: Python 2.7
+  default_region: us-east-1
+  profile: eb-cli
+  sc: git
