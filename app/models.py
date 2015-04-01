@@ -33,8 +33,8 @@ class User(db.Model, UserMixin):
 	ties = db.Column(db.Integer)
 	total_played = db.Column(db.Integer)
 
-	#events_hosting = db.relationship("Event", secondary=user_hosted, backref="user")
-	#events_played = db.relationship("Event", secondary=user_played, backref="user")
+	events_hosting = db.relationship("Event", secondary=user_hosted, backref="user")
+	events_played = db.relationship("Event", secondary=user_played, backref="user")
 
 	def __init__(self, name):
 		self.name = name
@@ -78,9 +78,10 @@ class Event(db.Model):
 	name = db.Column(db.String(64))
 	event_type = db.Column(db.String(64))
 	datetime = db.Column(db.DateTime)
-	game = db.Column(db.String(64))
+	description = db.Column(db.String(256))
+	host_id = db.relationship
 
-	def __init__(self, event_name, datetime, event_type, host, winner=None, loser=None, draw=False):
+	def __init__(self, event_name, datetime, event_type, host, description, winner=None, loser=None, draw=False):
 		self.name = event_name
 		self.datetime = datetime
 		self.winner = winner
@@ -88,6 +89,7 @@ class Event(db.Model):
 		self.event_type = event_type
 		self.results = dict()
 		self.host = host
+		self.description = description
 
 	def __repr__(self):
 		return '<%r on %r>' % (self.event_type, self.datetime.strftime("%Y-%m-%d %H:%M:%S"))
