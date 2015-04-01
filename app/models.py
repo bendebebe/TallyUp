@@ -33,8 +33,8 @@ class User(db.Model, UserMixin):
 	ties = db.Column(db.Integer)
 	total_played = db.Column(db.Integer)
 
-	events_hosting = db.relationship("Event", secondary=user_hosted, backref="user")
-	events_played = db.relationship("Event", secondary=user_played, backref="user")
+	#events_hosting = db.relationship("Event", secondary=user_hosted, backref="user")
+	#events_played = db.relationship("Event", secondary=user_played, backref="user")
 
 	def __init__(self, name):
 		self.name = name
