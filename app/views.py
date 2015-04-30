@@ -17,12 +17,12 @@ with app.test_request_context('/index', method='POST'):
 
 @app.route('/')
 @app.route('/index')
-@login_required
+#@login_required
 def index():
     return render_template('index.html', user=current_user, title='Home')
 
 @app.route('/about')
-@login_required
+#@login_required
 def about():
     return render_template('about.html', title='About', user=current_user)
 
@@ -57,19 +57,19 @@ def login():
     return render_template('login.html', title='Sign In')
 
 @app.route("/logout")
-@login_required
+#@login_required
 def logout():
     logout_user()
     print "Logged out."
     return redirect(url_for("login"))
 
 @app.route("/profile")
-@login_required
+#@login_required
 def profile():
     return render_template('profile.html', title='Profile', user=current_user)
 
 @app.route("/host", methods=["GET","POST"])
-@login_required
+#@login_required
 def host():
     if request.method == "POST":
         event = request.form["event-name"]
@@ -82,6 +82,11 @@ def host():
         #db.session.commit()
         return redirect(url_for("host"))
     return render_template('host.html', title='Host Event', user=current_user, users=User.query.all())
+
+@app.route("/view-events", methods=["GET","POST"])
+#@login_required
+def view_events():
+    return render_template('eventlist.html', title='View Events', user=current_user, events_hosting=None)
 
 
 #######################
