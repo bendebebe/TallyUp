@@ -75,8 +75,7 @@ def host():
         description = request.form["event-description"]
         datetime = get_date(request.form["datepicker"])
         event_type = request.form["event-type"]
-        host = User(current_user.name)
-        e = Event(event, current_user.name, datetime, event_type, current_user.name, description)
+        e = Event(event, datetime, event_type, current_user.name, description)
         db.session.add(event)
         db.commit()
         return redirect(url_for("host"))
