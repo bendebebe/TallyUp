@@ -108,12 +108,12 @@ def get_user(id=None, name=None, email=None):
 		return User.query.filter_by(email=email).first()
 	return None
 
-def host_event(event, datetime, event_type, host):
-	usr = User(host)
-	usr.events_hosted.append(Event(event, datetime, event_type, host))
-	db.session.add(usr)
-	db.session.commit()
-	return usr
+@login_manager.user_loader
+def get_events(name=None):
+	if name:
+		return Event.query.filter_by(name=name).first()
+	return None
+
 
 def record_result(event, datetime, event_type, host, winner, loser, draw=False):
 	e = Event(event, datetime, winner, loser, draw, event_type, host)

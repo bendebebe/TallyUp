@@ -1,14 +1,17 @@
 {% extends "base.html" %}
 
 {% if user != None %}
-	{% block navbar %}
-		<li>
-        	<a href="/profile">Profile</a>
-		</li>
-		<li>
+    {% block navbar %}
+        <li>
+            <a href="/profile">Profile</a>
+        </li>
+        <li>
             <a href="/host">Host Event</a>
         </li>
-	{% endblock %}
+        <li>
+            <a href="/view-events">View Events</a>
+        </li>
+    {% endblock %}
 {% endif %}
 
 {% block content %}

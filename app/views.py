@@ -3,7 +3,7 @@ from flask import render_template, Flask, url_for, redirect, request, flash
 from flask.ext.login import login_required, login_user, logout_user, current_user
 from flask_sqlalchemy import SQLAlchemy
 from app import app, db
-from models import User, Event, get_user, host_event, record_result
+from models import User, Event, get_user, get_events, record_result
 from simplecrypt import decrypt
 from config import SECRET_KEY
 import copy
@@ -75,12 +75,20 @@ def host():
         description = request.form["event-description"]
         datetime = get_date(request.form["datepicker"])
         event_type = request.form["event-type"]
-        print(event, description, datetime, event_type)
+        #print(event, description, datetime, event_type)
         e = Event(event, datetime, event_type, current_user.name, description)
         db.session.add(e)
-        #db.commit()
+        db.session.commit()
         return redirect(url_for("host"))
     return render_template('host.html', title='Host Event', user=current_user, users=User.query.all())
+
+@app.route("/view-events", methods=["GET"])
+@login_required
+def view_events():
+    events_hosting = get_events(current_user.name)
+    return render_template('eventlist.html', title="View Events", events_hosting=events_hosting)
+
+
 #######################
 # Helper Functions
 #######################
