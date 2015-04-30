@@ -78,15 +78,9 @@ def host():
         #print(event, description, datetime, event_type)
         e = Event(event, datetime, event_type, current_user.name, description)
         db.session.add(e)
-        db.session.commit()
+        #db.session.commit()
         return redirect(url_for("host"))
     return render_template('host.html', title='Host Event', user=current_user, users=User.query.all())
-
-@app.route("/view-events", methods=["GET"])
-@login_required
-def view_events():
-    events_hosting = get_events(current_user.name)
-    return render_template('eventlist.html', title="View Events", events_hosting=events_hosting)
 
 
 #######################
