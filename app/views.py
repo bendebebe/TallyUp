@@ -17,7 +17,7 @@ with app.test_request_context('/index', method='POST'):
 
 @app.route('/')
 @app.route('/index')
-#@login_required
+@login_required
 def index():
     return render_template('index.html', user=current_user, title='Home')
 
