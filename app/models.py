@@ -80,7 +80,7 @@ class Event(db.Model):
 	datetime = db.Column(db.DateTime)
 	description = db.Column(db.String(256))
 
-	def __init__(self, event_name, datetime, event_type, host, description=None, winner=None, loser=None, draw=False):
+	def __init__(self, event_name, datetime, event_type, host, description, winner=None, loser=None, draw=False):
 		self.name = event_name
 		self.datetime = datetime
 		self.winner = winner

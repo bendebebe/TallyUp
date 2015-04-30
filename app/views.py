@@ -13,7 +13,7 @@ with app.test_request_context('/index', method='POST'):
     # now you can do something with the request until the
     # end of the with block, such as basic assertions:
     assert request.path == '/index'
-    assert request.method == 'POST'
+    assert request.method == 'POST' 
 
 @app.route('/')
 @app.route('/index')
@@ -48,6 +48,7 @@ def login():
                 remember = request.form.get("remember", "no") == "yes"
                 if login_user(user, remember=remember):
                     print "Logged in."
+                    print current_user.total_played
                     return redirect(url_for("index"))
                 else:
                     print "Error logging in. Please contact administrator."
