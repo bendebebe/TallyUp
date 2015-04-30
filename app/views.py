@@ -75,9 +75,10 @@ def host():
         description = request.form["event-description"]
         datetime = get_date(request.form["datepicker"])
         event_type = request.form["event-type"]
+        print(event, description, datetime, event_type)
         e = Event(event, datetime, event_type, current_user.name, description)
-        db.session.add(event)
-        db.commit()
+        db.session.add(e)
+        #db.commit()
         return redirect(url_for("host"))
     return render_template('host.html', title='Host Event', user=current_user, users=User.query.all())
 #######################
@@ -85,4 +86,4 @@ def host():
 #######################
 
 def get_date(date):
-    return dt.datetime.strptime(a, '%Y/%m/%d %H:%M')
+    return dt.datetime.strptime(date, '%Y/%m/%d %H:%M')
