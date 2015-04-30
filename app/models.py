@@ -32,8 +32,6 @@ class User(db.Model, UserMixin):
 	losses = db.Column(db.Integer)
 	ties = db.Column(db.Integer)
 	total_played = db.Column(db.Integer)
-	evenets_playing = db.relationship('Events', backref='person',
-                                lazy='dynamic')
 
 	#events_hosting = db.relationship("Event", secondary=user_hosted, backref="user")
 	#events_played = db.relationship("Event", secondary=user_played, backref="user")
@@ -81,10 +79,8 @@ class Event(db.Model):
 	event_type = db.Column(db.String(64))
 	datetime = db.Column(db.DateTime)
 	description = db.Column(db.String(256))
-	users_joined = db.relationship('Users Joined', backref='person',
-                                lazy='dynamic')
 
-	def __init__(self, event_name, datetime, event_type, host, description, winner=None, loser=None, draw=False):
+	def __init__(self, event_name, datetime, event_type, host, description=None, winner=None, loser=None, draw=False):
 		self.name = event_name
 		self.datetime = datetime
 		self.winner = winner
