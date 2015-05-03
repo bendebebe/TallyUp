@@ -20,7 +20,6 @@ $(document).ready(function(){
 {% block content %}
 <div class="container" style="margin-bottom:10%;">
     <div class="row">
-
         <div class="col-md-12">
             <h1>{{ user.name }}'s Events Hosting</h1>
         {% if events_hosting == None %}
@@ -32,10 +31,10 @@ $(document).ready(function(){
                     <thead>
                         <th>Event Name</th>
                         <th>Host Name</th>
-                        
                         <th>Event Type</th>
                         <th>Description</th>
                         <th>Participants</th>
+                        <th>Winner</th>
                         <th>Date/Time</th>
                         <th>Edit</th>
                         <th>Delete</th>
@@ -55,6 +54,7 @@ $(document).ready(function(){
                                 {{ p.name }}<br>
                                 {% endfor %}
                             </td>
+                            <td>{{ event.winner }}</td>
                             <td>{{ event.datetime }}</td>
                             <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button style="size:50%" class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
     

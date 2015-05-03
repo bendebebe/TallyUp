@@ -16,3 +16,8 @@ p{
 h1{
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
+
+tr
+{
+	color: white;
+}
