@@ -9,12 +9,9 @@ from config import SECRET_KEY
 # Tables
 ########################
 
-user_hosted = db.Table("user_hosted", db.Model.metadata,
-						db.Column("user_id", db.Integer, db.ForeignKey("user.id")),
-						db.Column("event_id", db.Integer, db.ForeignKey("event.id")))
-user_played = db.Table("user_played", db.Model.metadata,
-						db.Column("user_id", db.Integer, db.ForeignKey("user.id")),
-						db.Column("event_id", db.Integer, db.ForeignKey("event.id")))
+participants = db.Table('participants',
+		db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
+		db.Column('event_id', db.Integer, db.ForeignKey('event.id')))
 
 ########################
 # Models
@@ -32,9 +29,7 @@ class User(db.Model, UserMixin):
 	losses = db.Column(db.Integer)
 	ties = db.Column(db.Integer)
 	total_played = db.Column(db.Integer)
-
-	#events_hosting = db.relationship("Event", secondary=user_hosted, backref="user")
-	#events_played = db.relationship("Event", secondary=user_played, backref="user")
+	events_played = db.relationship('Event', secondary=participants, backref=db.backref("events", lazy="dynamic"))
 
 	def __init__(self, name):
 		self.name = name
@@ -50,17 +45,6 @@ class User(db.Model, UserMixin):
 		self.email = email
 		self.password = encrypt(SECRET_KEY, password)
 		db.session.commit()
-
-	'''
-	@hybrid_property
-	def upcoming_events(self):
-		return [e for e in self.events_played if e.datetime > str(dt.today())]
-
-	@hybrid_property
-	def past_events(self):
-		return (self.events_played + 
-				[e for e in self.events_played if e.datetime < str(dt.today())])
-	'''
 
 	@hybrid_property
 	def get_metadata(self):
@@ -79,8 +63,10 @@ class Event(db.Model):
 	event_type = db.Column(db.String(64))
 	datetime = db.Column(db.DateTime)
 	description = db.Column(db.String(256))
+	host = db.Column(db.String(64))
+	participants = db.relationship('User', secondary=participants, backref=db.backref("users", lazy="dynamic"))
 
-	def __init__(self, event_name, datetime, event_type, host, description, winner=None, loser=None, draw=False):
+	def __init__(self, event_name, datetime, event_type, host, description, participants, winner=None, loser=None, draw=False):
 		self.name = event_name
 		self.datetime = datetime
 		self.winner = winner
@@ -91,7 +77,7 @@ class Event(db.Model):
 		self.description = description
 
 	def __repr__(self):
-		return '<%r on %r>' % (self.event_type, self.datetime.strftime("%Y-%m-%d %H:%M:%S"))
+		return '<%r on %r>' % (self.name, self.datetime.strftime("%Y-%m-%d %H:%M:%S"))
 
 
 ########################
@@ -108,11 +94,17 @@ def get_user(id=None, name=None, email=None):
 		return User.query.filter_by(email=email).first()
 	return None
 
-@login_manager.user_loader
 def get_events(name=None):
 	if name:
-		return Event.query.filter_by(name=name).first()
+		#print len(Event.query.filter_by(host=name).all())
+		return Event.query.filter_by(host=name).all()
 	return None
+
+def get_event(id=None, datetime=None):
+	if id:
+		return Event.query.filter_by(id=int(id)).first()
+	if datetime:
+		return Event.query.filter_by(datetime=datetime).first()
 
 
 def record_result(event, datetime, event_type, host, winner, loser, draw=False):

@@ -29,9 +29,11 @@
             </div>
           </div>
           <label class="form-label">Pick Participants</label>
-          <select class="form-control" multiple="multiple">
-            {% for user in users %}
-              <option>{{ user.name }}</option>
+          <select class="form-control" multiple="on" name="participants">
+            {% for u in users %}
+              {% if user.name != u.name %}
+                <option>{{ u.name }}</option>
+              {% endif %}
             {% endfor %}
           </select>
         </div>
@@ -44,7 +46,7 @@
           </div>
           <div class="form-group">
             <label class="form-label">Event Description</label>
-            <input type="text" class="form-control" name="event-description">
+            <input type="text" class="form-control" name="event-description" placeholder="ex. Chelsea vs. Arsenal, Super Bowl, etc.">
           </div>
         </div>
         <div class="col-md-4">
@@ -54,7 +56,7 @@
             <div class="controls"></div>
           </div>
           <label class="form-label">Ready to host your event?</label>
-          <button type="submit" name="go" href="/host-event" class="btn btn-lg btn-primary btn-block">Submit</button>  
+          <button type="submit" id="submit" name="go" href="/host-event" class="btn btn-lg btn-primary btn-block">Submit</button>  
         </div>
       </div>
     </form>
