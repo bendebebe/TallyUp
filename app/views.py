@@ -62,11 +62,6 @@ def logout():
     print "Logged out."
     return redirect(url_for("login"))
 
-@app.route("/profile")
-@login_required
-def profile():
-    return render_template('profile.html', title='Profile', user=current_user)
-
 @app.route("/host", methods=["GET","POST"])
 @login_required
 def host():
