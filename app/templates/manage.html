@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+<script type="text/javascript">
+$(document).ready(function(){
+    $("[data-toggle=tooltip]").tooltip();
+});</script>
+{% if user != None %}
+    {% block navbar %}
+        <li>
+            <a href="/profile">Profile</a>
+        </li>
+        <li>
+            <a href="/host">Host Event</a>
+        </li>
+        <li>
+            <a href="/view-events">View Events</a>
+        </li>
+    {% endblock %}
+{% endif %}
+
+{% block content %}
+
+
+
+
+<form class="container" method="post" action="#">
+    <div class="row" style="margin-top:5%;">
+          <div class="form-group">
+            <div class="col-md-4" style="text-align:right;">
+            <h4>Event Name</h4><br>
+        <h4>Pick Participants (REQUIRED)</h4>
+        {% for u in users %}
+        <br>
+        {% endfor %}
+        <h4>Type of Event/Game</h4><br>
+        <h4>Event Description</h4><br>
+        <h4>Event Date/Time (Y/m/d H:M)</h4><br>
+        <h4>Pick a winner</h4><br>
+         </div>
+            <div class="controls col-md-8 ">
+              <input type="text" class="form-control" placeholder="{{ event.name }}" name="event-name"><br>
+              <select class="form-control" multiple="on" name="participants">
+            {% for u in users %}
+              {% if user.name != u.name %}
+                <option>{{ u.name }}</option>
+              {% endif %}
+            {% endfor %}
+          </select><br>
+              <input type="text" class="form-control" placeholder="{{ event.event_type }}" name="event-type"><br>
+              <input type="text" class="form-control" name="event-description" placeholder="{{ event.description }}"><br>
+              <input class="form-control" id="datetimepicker" type="text" placeholder="{{ event.datetime }}" name="datepicker"><br>
+              <select class="form-control" name="winner">
+            {% for u in event.participants %}
+              {% if user.name != u.name %}
+                <option>{{ u.name }}</option>
+              {% endif %}
+            {% endfor %}
+            <option>None</option>
+          </select><br>
+          <button type="submit" id="submit" style="width:25%"name="go" href="/manage/{{ event.id }}" class="btn btn-lg btn-primary btn-block">Submit Edits</button>
+
+            </div>
+          </div>
+            
+
+</form>
+
+<!--
+  <h1>Host Event</h1>
+      <div class="row">
+        <div class="col-md-6">
+          
+          
+          
+        </div>
+        <div class="col-md-12">
+          <div class="form-group">
+            
+            <div class="controls">
+              <input type="text" class="form-control" placeholder="ex. FIFA, Ping Pong, etc." name="event-type">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Event Description</label>
+            <input type="text" class="form-control" name="event-description" placeholder="ex. Chelsea vs. Arsenal, Super Bowl, etc.">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label class="control-label">Select Event Date<br></label>
+          <input class="form-control" id="datetimepicker" type="text" name="datepicker">
+          <div class="form-group">
+            <div class="controls"></div>
+          </div>
+          <label class="form-label">Ready to host your event?</label>
+          <button type="submit" id="submit" name="go" href="/host-event" class="btn btn-lg btn-primary btn-block">Submit</button>  
+        </div>
+      </div>
+    </form>-->
+
+{% endblock %}

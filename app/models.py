@@ -65,6 +65,7 @@ class Event(db.Model):
 	description = db.Column(db.String(256))
 	host = db.Column(db.String(64))
 	participants = db.relationship('User', secondary=participants, backref=db.backref("users", lazy="dynamic"))
+	winner = db.Column(db.String(64))
 
 	def __init__(self, event_name, datetime, event_type, host, description, participants, winner=None, loser=None, draw=False):
 		self.name = event_name

@@ -3,7 +3,7 @@ from flask import render_template, Flask, url_for, redirect, request, flash
 from flask.ext.login import login_required, login_user, logout_user, current_user
 from flask_sqlalchemy import SQLAlchemy
 from app import app, db
-from models import User, Event, get_user, get_events, record_result
+from models import User, Event, get_user, get_event, get_events, record_result
 from simplecrypt import decrypt
 from config import SECRET_KEY
 import copy
@@ -76,16 +76,15 @@ def host():
         datetime = get_date(request.form["datepicker"])
         event_type = request.form["event-type"]
         participants = request.form.getlist('participants')
-        e = Event(event, datetime, event_type, current_user.name, description, participants)
-        db.session.add(e)
-        for p in xrange(0,len(participants)):
-            u = get_user(name=participants[p])
-            e.participants += [u]
-        db.session.commit()
-        
-        
-        return redirect(url_for("host"))
-        
+        if event and description and datetime and event_type and participants:
+            e = Event(event, datetime, event_type, current_user.name, 
+                        description, participants)
+            db.session.add(e)
+            for p in xrange(0,len(participants)):
+                u = get_user(name=participants[p])
+                e.participants += [u]
+            db.session.commit()
+            return redirect(url_for("host"))
     return render_template('host.html', title='Host Event', user=current_user, users=User.query.all())
 
 @app.route("/view-events", methods=["GET","POST"])
@@ -93,6 +92,45 @@ def host():
 def view_events():
     events = get_events(current_user.name)
     return render_template('eventlist.html', title='View Events', user=current_user, events_hosting=events)
+
+@app.route("/manage/<event_id>", methods=["GET", "POST"])
+def manage(event_id):
+    e = get_event(id=int(event_id))
+    if request.method == "POST":
+        event = request.form["event-name"]
+        description = request.form["event-description"]
+        datetime = request.form["datepicker"]
+        event_type = request.form["event-type"]
+        participants = request.form.getlist('participants')
+        winner = request.form["winner"]
+        if event:
+            e.name = event
+        if description:
+            e.description = description
+        if event_type:
+            e.event_type = event_type
+        if participants:
+            for p in xrange(0,len(participants)):
+                u = get_user(name=participants[p])
+                if u not in e.participants:
+                    e.participants += [u]
+        if datetime:
+            e.datetime = datetime
+        if winner:
+            e.winner = winner
+        db.session.commit()
+        return redirect(url_for("view_events"))
+
+    return render_template('manage.html', users=User.query.all(), title='Manage Event', user=current_user, event=e)
+
+@app.route("/delete/<event_id>", methods=["GET", "POST"])
+def delete(event_id):
+    e = get_event(id=int(event_id))
+    e.participants = []
+    print e.participants
+    db.session.delete(e)
+    db.session.commit()
+    return redirect(url_for("view_events"))
 
 
 #######################
