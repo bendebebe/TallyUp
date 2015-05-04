@@ -38,7 +38,7 @@ $(document).ready(function(){
          </div>
             <div class="controls col-md-8 ">
               <input type="text" class="form-control" placeholder="{{ event.name }}" name="event-name"><br>
-              <select class="form-control" multiple="on" name="participants">
+              <select class="form-control" style="height:12.5%;" multiple="on" name="participants">
             {% for u in users %}
               {% if user.name != u.name %}
                 <option>{{ u.name }}</option>
